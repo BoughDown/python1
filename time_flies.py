@@ -34,13 +34,13 @@ whole_years = (whole_days//365)
 # print(whole_hours)
 
 if whole_hours == 0:
-    print(f"{seconds} is {whole_minutes} minutes, and {remainder_seconds} seconds")
+    print(f"{seconds} seconds is {whole_minutes} minutes, and {remainder_seconds} seconds")
 
 if 0 < whole_hours < 2:
-    print(f"{seconds} is {whole_hours} hour, {remainder_minutes} minutes, and {remainder_seconds} seconds")
+    print(f"{seconds} seconds is {whole_hours} hour, {remainder_minutes} minutes, and {remainder_seconds} seconds")
 
 if 1 < whole_hours < 24:
-    print(f"{seconds} is {whole_hours} hours, {remainder_minutes} minutes, and {remainder_seconds} seconds")
+    print(f"{seconds} seconds is {whole_hours} hours, {remainder_minutes} minutes, and {remainder_seconds} seconds")
 
 if whole_hours > 24:
     print(f"{seconds} seconds is {whole_days} days, {remainder_hours} hours, {remainder_minutes} minutes, and {remainder_seconds} seconds")
