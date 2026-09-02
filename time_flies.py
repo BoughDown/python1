@@ -8,7 +8,7 @@ This assignment will attempt to accurately generate a random number representing
 from random import randint
 
 # Sets seconds as a random integer between 100 and 8000, as the parameters dictate.
-seconds = randint(100, 32000000)
+seconds = randint(100, 8000)
 # Sets remainder_seconds as the amount of seconds that could not divide into 60.
 remainder_seconds = (seconds%60)
 
@@ -36,7 +36,10 @@ whole_years = (whole_days//365)
 if whole_hours == 0:
     print(f"{seconds} is {whole_minutes} minutes, and {remainder_seconds} seconds")
 
-if 0 < whole_hours < 24:
+if 0 < whole_hours < 2:
+    print(f"{seconds} is {whole_hours} hour, {remainder_minutes} minutes, and {remainder_seconds} seconds")
+
+if 1 < whole_hours < 24:
     print(f"{seconds} is {whole_hours} hours, {remainder_minutes} minutes, and {remainder_seconds} seconds")
 
 if whole_hours > 24:
