@@ -23,4 +23,3 @@ for i in range(0, number_int):
     list_die.append(randint(1, sides_int))
 
 print(list_die)
-    

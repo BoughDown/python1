@@ -1,0 +1,41 @@
+"""
+User Input Dice Project - Tommy
+
+Goal is to add some restrictions to the dice program so numbers too large, and to remove negative numbers.
+"""
+
+from random import randint
+
+list_die = []
+
+confirm = input("Would you like to roll some dice? Yes or No?\n")
+if confirm in ("No", "no", "N", "n"):
+    raise SystemExit("Maybe next time.")
+
+number = input("How many die would you like to roll?\n")
+
+if int(number) > 10:
+    raise ValueError("Number of dice rolled cannot exceed 10.")
+if int(number) < 1:
+    raise ValueError("Number of dice rolled cannot be beneath 1.")
+
+number_int = int(number)
+
+sides = input("How many sides on each dice?\n")
+
+if int(sides) > 20:
+    raise ValueError("Number of sides on each dice rolled cannot exceed 20.")
+if int(sides) < 2:
+    raise ValueError("Number of sides on each dice rolled cannot be beneath 2.")
+
+sides_int = int(sides)
+
+# print(randint(1, sides_int))
+
+print("Results:")
+
+for i in range(0, number_int):
+    # print(f"{1, number_int}")
+    list_die.append(randint(1, sides_int))
+
+print(list_die)
