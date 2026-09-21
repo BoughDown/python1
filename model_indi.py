@@ -14,7 +14,7 @@ dogs = []
 
 def ball_string(balls):
     """
-    Returns how many balls there are, and prints out a readable list based how many balls there are.
+    Returns how many balls there are, and prints out a readable list based on how many balls there are.
     """
     if len(balls) == 0:
         return 'no balls'
