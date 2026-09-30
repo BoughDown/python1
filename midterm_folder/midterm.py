@@ -9,5 +9,5 @@ class Item:
     Represents an item that the players can add to their inventory and equip.
 
     Attributes:
-        
+    
     """

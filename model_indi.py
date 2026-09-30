@@ -61,7 +61,7 @@ class Human:
 
     def throw_ball(self, ball, target_location):
         """
-        This functions alloqs the human to be able to throw the ball to different locations in a set list.
+        This functions allows the human to be able to throw the ball to different locations in a set list.
         """
         target_location.balls.append(ball)
         self.balls.remove(ball)
