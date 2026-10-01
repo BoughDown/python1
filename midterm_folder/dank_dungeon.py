@@ -162,6 +162,7 @@ class Player:
                     grab_input = input(f"Do you wish to obtain it? Yes or No.\n")
                     if grab_input.lower() == "yes":
                         bob.inventory.append(item)
+                        self.current_room(self.inventory.remove(item))
                         print(f"You have obtained the {item.name}.")
                     elif grab_input.lower() == "no":
                         print(f"You leave the {item.name}.")
