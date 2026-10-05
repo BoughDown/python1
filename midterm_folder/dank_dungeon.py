@@ -89,9 +89,10 @@ class Opponent:
         stun: Stuns the enemy when attacked.
         perish: Kills the enemy when health = 0.
     """
-    def __init__ (self, name, health, current_room: Room):
+    def __init__ (self, name, health, damage, current_room: Room):
         self.name = name
         self.health = health
+        self.damage = damage
         self.current_room = current_room
 
 class Player:
@@ -120,7 +121,7 @@ class Player:
             self.health = health
             self.current_room = current_room
             self.player_inventory = []
-            self.active_item = None
+            self.active_item = ("Dagger", 10)
             self.first_time = True
 
     def action(self):
@@ -153,10 +154,12 @@ class Player:
         print(f"Your inventory contains:")
         for item in self.player_inventory:
             print(f"\t{item.name}")
-
-            user_equip = input("Which item do you wish to equip?\n")
+        
+        user_equip = input("Which item do you wish to equip?\n")
+        
+        for item in self.player_inventory:
             if user_equip.lower() == item.name.lower():
-                self.active_item = user_equip
+                self.active_item = item
                 print(f"You have equipped the {item.name}.")
                 return
         print("Invalid Choice.")
@@ -182,8 +185,7 @@ class Player:
                 print(f"You have arrived in the {self.current_room.name}.")
                 for item in self.current_room.items:
                     for opponent in self.current_room.opponents:
-                        if opponent in self.current_room.opponents:
-                            print(f"You come across the {opponent.name}.")
+                        self.attack()
                     print(f"You have found the {room_list(self.current_room.items)}.")
                     grab_input = input(f"Do you wish to obtain it? Yes or No.\n")
                     if grab_input.lower() == "yes":
@@ -206,12 +208,16 @@ class Player:
         self.active_item.use()
 
     def attack(self):
-        for opponent in self.current_room.opponents:
-            if opponent in self.current_room.opponents > 0:
-                attack_input = input(print(f"Do you wish to attack the {opponent.name}?\n"))
-                if attack_input.lower == "yes":
-                    int(opponent.health - self.active_item.damage)
-                if attack_input.lower == "no":
+            for opponent in self.current_room.opponents:
+                print(f'You have found the {opponent.name}.')
+                attack_input = input(f"Do you wish to attack the {opponent.name}? Yes or no.\n")
+                if attack_input.lower() == "yes":
+                    opponent.health -= self.active_item.damage
+                    print(f"You have hit the {opponent.name} for {self.active_item.damage} damage.")
+                    print(f"The {opponent.name} now has {opponent.health} HP remaining.")
+                    if opponent.health <=0:
+                        print(f"You have slain the {opponent.name}")
+                if attack_input.lower() == "no":
                     print(f"You do not attack the {opponent.name}.")
                 
 
@@ -243,8 +249,10 @@ gate_room.connect_rooms([brother_light_chamber, brother_darkness_chamber])
 brother_light_chamber.connect_room(gate_room)
 brother_darkness_chamber.connect_room(gate_room)
 
-brother_of_light = Opponent("Brother of Light", 75, brother_light_chamber)
-brother_of_darkness = Opponent("Brother of Darkness", 75, brother_darkness_chamber)
+acolyte = Opponent("King's Acolyte", 10, 5, hall_of_souls)
+# copy.deepcopy(acolyte)
+brother_of_light = Opponent("Brother of Light", 75, 100, brother_light_chamber)
+brother_of_darkness = Opponent("Brother of Darkness", 75, 100, brother_darkness_chamber)
 
 bob = Player("Player", 100, breach)
 
@@ -264,6 +272,7 @@ brother_light_chamber.items.append(sword_of_light)
 
 hall_of_souls.objects.append(orb_conduit)
 
+hall_of_souls.opponents.append(acolyte)
 brother_light_chamber.opponents.append(brother_of_light)
 brother_darkness_chamber.opponents.append(brother_of_darkness)
 
