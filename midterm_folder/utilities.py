@@ -12,3 +12,9 @@ def room_list(items):
     #         return_string += item.name + ', '
     #     return_string += f'and {items[-1].name}'
     #     return return_string
+
+def room_objects(objects):
+    if len(objects) == 0:
+        return None
+    elif len(objects) == 1:
+        return (f'{objects[0].name}')

@@ -9,6 +9,7 @@ from copy import deepcopy
 import os 
 import platform
 from utilities import room_list
+from utilities import room_objects
 
 class Item:
     """
@@ -38,9 +39,8 @@ class Object:
     Methods:
         activate: Allows the object to activate.
     """
-    def __init__ (self, name, current_room: Room):
+    def __init__ (self, name):
         self.name = name
-        self.current_room = current_room
 
     def activate(self):
         pass
@@ -62,6 +62,7 @@ class Room:
         self.name = name
         self.connected_rooms = []
         self.items = []
+        self.objects = []
     
     def connect_room(self, room_to_connect: Room):
         """Connects a room."""
@@ -110,7 +111,7 @@ class Player:
         #     if item.special_ability:
         #         item.special_ability()
         if self.first_time:
-            message = "You arrive on the alien ship. You must destroy their king everything you know succumbs to them.\nPress 'T' to travel or 'I' see your inventory.\n"
+            message = "You have breached the alien ship. You must destroy their king before everything you know succumbs to him.\nPress 'T' to travel or 'I' see your inventory.\n"
             self.first_time = False
         else:
             message = "T/I? "
@@ -158,16 +159,19 @@ class Player:
                 print(f"You have arrived in the {self.current_room.name}.")
                 for item in self.current_room.items:
                     # self.grab()
-                    print(f"You have found the {room_list(self.current_room.items)}")
+                    print(f"You have found the {room_list(self.current_room.items)}.")
                     grab_input = input(f"Do you wish to obtain it? Yes or No.\n")
                     if grab_input.lower() == "yes":
                         bob.inventory.append(item)
-                        self.current_room(self.inventory.remove(item))
+                        self.current_room.items.remove(item)
                         print(f"You have obtained the {item.name}.")
                     elif grab_input.lower() == "no":
                         print(f"You leave the {item.name}.")
                     else:
                         print("Invalid Choice. Try again.")
+                for object in self.current_room.objects:
+                    if object in self.current_room.objects:
+                        print(f"You have found a {room_objects(self.current_room.objects)}.")
                 return None
             
         print("Invalid room choice. Try again.")
@@ -217,6 +221,7 @@ class Minor:
         self.health = health
         self.current_room = current_room
 
+breach = Room("The Breach")
 hall_of_souls = Room("Hall of Souls")
 chamber_of_light = Room("Chamber of Light")
 chamber_of_darkness = Room("Chamber of Darkness")
@@ -226,15 +231,16 @@ brother_light_chamber = Room("Cell of Light")
 brother_darkness_chamber = Room("Cell of Darkness")
 passageway = Room("Passageway")
 
-hall_of_souls.connect_rooms([chamber_of_light, chamber_of_darkness, portal])
+breach.connect_room(hall_of_souls)
+hall_of_souls.connect_rooms([chamber_of_light, chamber_of_darkness])
 chamber_of_light.connect_room(hall_of_souls)
 chamber_of_darkness.connect_room(hall_of_souls)
 portal.connect_room(gate_room)
-gate_room.connect_rooms([brother_light_chamber, brother_darkness_chamber, passageway])
+gate_room.connect_rooms([brother_light_chamber, brother_darkness_chamber])
 brother_light_chamber.connect_room(gate_room)
 brother_darkness_chamber.connect_room(gate_room)
 
-bob = Player("Player", 100, hall_of_souls)
+bob = Player("Player", 100, breach)
 
 bob.inventory.append(Item("Dagger"))
 
@@ -243,10 +249,14 @@ orb_of_darkness = Item("Orb of Darkness")
 sword_of_light = Item("Sword of Light")
 sword_of_darkness = Item("Sword of Darkness")
 
+orb_conduit = Object("Orbicular Conduit")
+
 chamber_of_light.items.append(orb_of_light)
 chamber_of_darkness.items.append(orb_of_darkness)
 gate_room.items.append(sword_of_darkness)
 gate_room.items.append(sword_of_light)
+
+hall_of_souls.objects.append(orb_conduit)
 
 while True:
     bob.action()
