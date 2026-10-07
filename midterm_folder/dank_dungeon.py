@@ -335,7 +335,7 @@ brother_of_light = Opponent("Brother of Light", 75, 100, brother_light_chamber, 
 brother_of_darkness = Opponent("Brother of Darkness", 75, 100, brother_darkness_chamber, "Sword of Light")
 
 # Creates the player and their spawn point.
-bob = Player("Player", 100, breach)
+bob = Player("Player", 100, passageway)
 # Adds the dagger to the players inventory and sets it as the active item.
 dagger = Item("Dagger", 10)
 bob.player_inventory.append(dagger)
