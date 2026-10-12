@@ -1,7 +1,6 @@
 # from room import Room
 from opponent import Opponent
 from item import Item
-from mechanics import *
 from room import Room
 from copy import copy
 
@@ -34,11 +33,11 @@ mid_plate.connect_rooms([left_plate, right_plate, warpriest_room, passageway])
 left_plate.connect_rooms([mid_plate, warpriest_room])
 right_plate.connect_rooms([mid_plate, warpriest_room])
 
-acolyte = Opponent("King's Acolyte", 10, 5, hall_of_souls, None)
+acolyte = Opponent("King's Acolyte", 10, 10, hall_of_souls, None)
 knight = Opponent("Revenant Knight", 250, 20, mid_plate, None)
 brother_of_light = Opponent("Brother of Light", 75, 100, brother_light_chamber, "Sword of Darkness")
 brother_of_darkness = Opponent("Brother of Darkness", 75, 100, brother_darkness_chamber, "Sword of Light")
-warpriest = Opponent("Warpriest", 1000, 30, warpriest_room, "Orb of Light")
+warpriest = Opponent("Warpriest", 1000, 50, warpriest_room, "Orb of Light")
 
 dagger = Item("Dagger", 10)
 

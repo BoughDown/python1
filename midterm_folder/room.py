@@ -15,7 +15,7 @@ class Room:
         self.name = name
         self.connected_rooms = []
         self.items = []
-        self.objects = []
+        self.mechanics = []
         self.opponents = []
         self.respawn_point = None
     

@@ -1,4 +1,7 @@
 from locations import hall_of_souls, dagger, portal
+from locations import warpriest
+
+activated_statues = []
 
 class Mechanics:
     """
@@ -41,8 +44,14 @@ class Mechanics:
             hall_of_souls.connect_room(portal)
 
         if "Statue" in self.name:
-            if player.activate():
-                pass
+            if self.name in activated_statues:
+                print(f"The {self.name} is already activated.")
+                return 
+            print(f"The {self.name} has been activated. The {self.name} glows with a faint blue flame.")
+            activated_statues.append(self.name)
+            if len(activated_statues) == 3:
+                print("The Warpriest is now weakened.")
+                warpriest.weakness = None
 
 orb_conduit = Mechanics("Orbicular Conduit")
 ctotem = Mechanics("Central Statue")

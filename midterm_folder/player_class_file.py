@@ -1,6 +1,7 @@
 import os
 from room import Room
 from locations import *
+from mechanics import Mechanics
 
 class Player:
     """Represents the player.
@@ -36,7 +37,7 @@ class Player:
         #     if item.special_ability:
         #         item.special_ability()
         if self.first_time:
-            message = "You have breached the alien ship. You must destroy their king before everything you know succumbs to him.\nPress 'T' to travel, 'I' to see your inventory, 'E' to equip an item, 'A' to interact with objects, and 'B' to attack.\n"
+            message = "You have breached the alien ship. You must destroy their king before everything you know succumbs to him.\nPress 'T' to travel, 'I' to see your inventory, 'E' to equip an item, 'A' to interact with mechanics, and 'B' to attack.\n"
             self.first_time = False
         else:
             message = "T/I/E/A/B? "
@@ -87,14 +88,13 @@ class Player:
         user_choice = input("Where do you choose to travel?\n")
         for room in self.current_room.connected_rooms:
             # Ignores capitalization
-            # if user_choice.lower() != room.name.lower():
-            #     # Only occurs if a successful move has not been made.
-            #     print("Invalid choice. Try again.")
             if user_choice.lower() == room.name.lower():
                 self.current_room = room
                 os.system("cls")
                 print(f"You have arrived in the {self.current_room.name}.")
-
+                if self.current_room.respawn_point == self.current_room:
+                    self.health = 200
+                    print("A warm light washes over you. Your health is restored.")
                 for opponent in self.current_room.opponents:
                     print(f"You come across the {opponent.name}.")
 
@@ -110,7 +110,7 @@ class Player:
                     else:
                         print("Invalid Choice. Try again.")
 
-                for mechanics in self.current_room.objects:
+                for mechanics in self.current_room.mechanics:
                     print(f"You have found the {mechanics.name}.")
                 return None
             
@@ -154,6 +154,11 @@ class Player:
                                 self.player_inventory.remove(item)
                         print("Your swords crumble to dust.")
                         self.active_item = None
+
+                if (warpriest.health) == 0:
+                    if threshold not in warpriest_room.connected_rooms:
+                        print("The threshold has opened.")
+                        warpriest_room.connect_room(threshold)
             else:
                 print(f"The {opponent.name} has {opponent.health} HP remaining.")
                 self.health -= opponent.damage
@@ -163,7 +168,7 @@ class Player:
                     return
 
     def activate(self):
-        """Lets the player interact with objects in the room."""
+        """Lets the player interact with mechanics in the room."""
         if len(self.current_room.mechanics) == 0:
             print("There is nothing here to interact with.")
         for mechanics in self.current_room.mechanics:
@@ -173,6 +178,6 @@ class Player:
     def perish(self):
         """Kills the player and respawns them at their room's respawn point."""
         print("You have perished...")
-        self.health = 100
+        self.health = 200
         self.current_room = self.current_room.respawn_point
         print(f"You awaken in the {self.current_room.name}.")
