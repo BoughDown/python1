@@ -1,3 +1,4 @@
+# Creates am item class.
 class Item:
     """
     Represents an item that mobs drop and players may acquire.

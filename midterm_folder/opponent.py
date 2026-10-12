@@ -1,8 +1,10 @@
+# Imports another file the current file needs.
 from room import Room
 
+# Creates opponent class
 class Opponent:
     """
-    Represents a low-level enemy
+    Represents any enemy
     
     Attributes:
         name (str): The name of the enemy.

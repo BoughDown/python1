@@ -1,3 +1,4 @@
+# Creates room class.
 class Room:
     """
     Class representing the idea of a room in our world.

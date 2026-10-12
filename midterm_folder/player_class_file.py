@@ -1,8 +1,10 @@
+# Imports other files the current file needs.
 import os
 from room import Room
 from locations import *
 from mechanics import Mechanics
 
+# Creates a player class.
 class Player:
     """Represents the player.
     
@@ -32,6 +34,7 @@ class Player:
             self.active_item = None
             self.first_time = True
 
+# Creates an action function for the player to move, attack, or interact with items/objects.
     def action(self):
         # for item in self.equipped_items:
         #     if item.special_ability:
@@ -55,12 +58,14 @@ class Player:
         if user_input.lower() == "b":
             self.attack()
 
+# Lets player see inventory.
     def inventory(self):
         """Lets the player see their inventory."""
         print(f"Your inventory contains:")
         for item in self.player_inventory:
             print(f"\t{item.name}")
 
+# Lets player equip item from inventory.
     def equip(self):
         """Sets active item for player."""
         print(f"Your inventory contains:")
@@ -75,7 +80,8 @@ class Player:
                 print(f"You have equipped the {item.name}.")
                 return
         print("Invalid Choice.")
-    
+
+# Allows player to move to different rooms.
     def move(self):
         """
         Offers the player a list of connected rooms to choose from, moves the player if the player selects an option.
@@ -97,7 +103,7 @@ class Player:
                     print("A warm light washes over you. Your health is restored.")
                 for opponent in self.current_room.opponents:
                     print(f"You come across the {opponent.name}.")
-
+                # Looks for items in the current room 
                 for item in self.current_room.items[:]:
                     print(f"You have found the {item.name}.")
                     grab_input = input("Do you wish to obtain it? Yes or No.\n")
@@ -109,17 +115,19 @@ class Player:
                         print(f"You leave the {item.name}.")
                     else:
                         print("Invalid Choice. Try again.")
-
+                # Looks for mechanics in the current room
                 for mechanics in self.current_room.mechanics:
                     print(f"You have found the {mechanics.name}.")
                 return None
             
         print("Invalid room choice. Try again.")
 
+# Lets player use the active item.
     def use_active_item(self):
         """Calls the active item's use method."""
         self.active_item.use()
 
+# Allows the player to attack.
     def attack(self):
         if self.active_item is None:
             print("You have nothing equipped.")
@@ -138,6 +146,7 @@ class Player:
             opponent.health -= damage
             print(f"You hit the {opponent.name} for {damage} damage.")
 
+            # Kills opponents if the health = 0
             if opponent.health <= 0:
                 print(f"You have slain the {opponent.name}.")
                 self.current_room.opponents.remove(opponent)
@@ -166,7 +175,7 @@ class Player:
                 if self.health <= 0:
                     self.perish()
                     return
-
+# Allows the player to activate mechanics in rooms. 
     def activate(self):
         """Lets the player interact with mechanics in the room."""
         if len(self.current_room.mechanics) == 0:
@@ -174,7 +183,7 @@ class Player:
         for mechanics in self.current_room.mechanics:
             mechanics.activate(self)
 
-                
+# Function for if the player dies.
     def perish(self):
         """Kills the player and respawns them at their room's respawn point."""
         print("You have perished...")

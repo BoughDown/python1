@@ -1,8 +1,11 @@
+# Imports other files the current file needs.
 from locations import hall_of_souls, dagger, portal
 from locations import warpriest
 
+# Creates a list for activated statues to be appended to.
 activated_statues = []
 
+# Creates a mechanics class for the player to interact with.
 class Mechanics:
     """
     An object in rooms the player could interact with.
@@ -19,7 +22,7 @@ class Mechanics:
         self.deposited = []
 
     def activate(self, player):
-        # Collect every orb the player is carrying if the object requires orbs.
+        """Collect every orb the player is carrying if the object requires orbs."""
         orbs = []
         if "Orbicular" in self.name:
             for item in player.player_inventory:
@@ -53,6 +56,7 @@ class Mechanics:
                 print("The Warpriest is now weakened.")
                 warpriest.weakness = None
 
+# Creates mechanics to place in rooms.
 orb_conduit = Mechanics("Orbicular Conduit")
 ctotem = Mechanics("Central Statue")
 ltotem = Mechanics("Statue of Light")

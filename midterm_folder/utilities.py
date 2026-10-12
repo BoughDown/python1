@@ -1,3 +1,4 @@
+# Creates function to show list of rooms in a readable format.
 def room_list(items):
     """Returns how many items there are in a room in a list format."""
     if len(items) == 0:
@@ -13,6 +14,7 @@ def room_list(items):
     #     return_string += f'and {items[-1].name}'
     #     return return_string
 
+# Creates a list for the amount of objects in a room.
 def room_objects(objects):
     if len(objects) == 0:
         return None
