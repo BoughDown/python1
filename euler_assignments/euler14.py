@@ -3,7 +3,7 @@ def collatz(n, i = 1):
     Returns the length of a collatz sequence for a provided number.
 
     Arguments:
-        n (int) = The number you begin with and want to calculate the conjecture for.
+        n (int): The number you begin with and want to calculate the conjecture for.
 
     Keyword Arguments:
         i (int): The index in the collatz sequence. 
