@@ -4,12 +4,13 @@ Factor Tree - Tommy Bough
 Create a factor tree for any given number.
 """
 
-twos = []
-threes = []
-fives = []
-sevens = []
+from time import time
 
-def factoring(n):
+time()
+
+
+
+def factoring(n, factors = []):
 	"""
 	Returns the factors for a given number, n.
 
@@ -23,37 +24,30 @@ def factoring(n):
 			raise ValueError("There are infinitely many factors of zero.")
 		
 	if n == 1:
-		return n	
-		
-	if n == 2:
-		twos.append(2) 
-		return n
+		return factors
 	
-	if n % 2 == 0:
-		new_factor = n / 2
-		twos.append(2)
-		factoring(new_factor)
+	for i in range(2, n + 1):
+		if a_divides_into_b(i, n):
+			factors.append(i)
+			return factoring(n//i, factors)
 
-	if n % 3 == 0:
-		new_factor = n / 3
-		threes.append(3)
-		factoring(new_factor)
 
-	if n % 5 == 0:
-		new_factor = n / 5
-		fives.append(5)
-		factoring(new_factor)
+def a_divides_into_b(a, b):
+	if b % a == 0:
+		return True
+	else: return False
 
-	if n % 7 == 0:
-		new_factor = n / 7
-		sevens.append(7)
-		factoring(new_factor)
+def print_factor_tree(n: int):
+	product = factoring(n)
+	for factors in factors:
+		for i in range (1, 100000000000000000000000):
+			factors.count(i)
 
-	new_factor = n
+	print(f'The factors of {n} include 2^{factors.count(2)}, 3^{factors.count(3)}, 5^{factors.count(5)}, 7^{factors.count(7)}, 11^{factors.count(11)}, 13^{factors.count(13)}')
 
-factoring(20)
+print_factor_tree(9473464)
 
-n = int
+# factors.sort()
 
-print(8%5)
-print(f"{20} has factors: 2^{twos.count}, 3^{threes.count}, 5^{fives.count}, 7^{sevens.count}.")
+# print(factors)
+

@@ -21,4 +21,4 @@ def factorial(n: int) -> int:
 
 # The pass command can be used to ignore functions without receiving an error.
 
-factorial(8)
+# factorial(8)

@@ -1,3 +1,5 @@
+from utilities import timed_function
+
 def collatz(n, i = 1):
     """
     Returns the length of a collatz sequence for a provided number.
@@ -25,11 +27,20 @@ def collatz(n, i = 1):
     i += 1
     return collatz(new_number, i)
 
-n_max_length = 0
-max_length = 0
-for i in range(1, 1000001):
-    length = collatz(i)
-    if length > max_length:
-        n_max_length = i
-        max_length = length
-        print(f"New max: {i} has a Collatz Sequence of length {length}.")
+@timed_function
+def max_collatz_length(number):
+    n_max_length = 0
+    max_length = 0
+    for i in range(1, 1000001):
+        length = collatz(i)
+        if length > max_length:
+            n_max_length = i
+            max_length = length
+            print(f"New max: {i} has a Collatz Sequence of length {length}.")
+
+# max_collatz_length = timed_function(max_collatz_length)
+
+timed_max_collatz = timed_function(max_collatz_length)
+max_collatz_length()
+
+timed_max_collatz(27)
