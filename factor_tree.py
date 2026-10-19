@@ -6,9 +6,16 @@ Create a factor tree for any given number.
 
 from time import time
 
-time()
+def timed_function(original_function):
+	def new_function(*args, **kwargs):
+		starttime = time()
+		result = original_function(*args, **kwargs)
+		endtime = time()
+		elapsedtime = endtime - starttime
+		print(f'Program took {elapsedtime} to run.')	
+		return result
 
-
+	return new_function
 
 def factoring(n, factors = []):
 	"""
@@ -31,7 +38,6 @@ def factoring(n, factors = []):
 			factors.append(i)
 			return factoring(n//i, factors)
 
-
 def a_divides_into_b(a, b):
 	if b % a == 0:
 		return True
@@ -46,8 +52,3 @@ def print_factor_tree(n: int):
 	print(f'The factors of {n} include 2^{factors.count(2)}, 3^{factors.count(3)}, 5^{factors.count(5)}, 7^{factors.count(7)}, 11^{factors.count(11)}, 13^{factors.count(13)}')
 
 print_factor_tree(9473464)
-
-# factors.sort()
-
-# print(factors)
-
