@@ -5,15 +5,19 @@ The goal is to import a large list of words and randomize them to create useable
 """
 
 # Imports random files needed.
-from random  import random
-from random import choice
+import random
+
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+file_path = os.path.join(script_dir, 'words_alpha.txt')
 
 # Creates lists for both large words and small words.
 bigwords = []
 smallwords = []
 
 # Imports the file into VS Code
-with open('words_alpha.txt', 'r') as word_file:
+with open(file_path, 'r') as word_file:
     bigtext = word_file.readlines()
 
     # Puts words in either list depending on their size.
