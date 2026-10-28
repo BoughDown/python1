@@ -4,7 +4,7 @@ Password Generator - Tommy Bough
 The goal is to import a large list of words and randomize them to create useable passwords.
 """
 
-# Imports random files needed.
+# Imports libraries needed.
 import random
 import os
 
