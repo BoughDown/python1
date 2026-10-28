@@ -6,9 +6,9 @@ The goal is to import a large list of words and randomize them to create useable
 
 # Imports random files needed.
 import random
-
 import os
 
+# Allows the program to be ran on different computers.
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(script_dir, 'words_alpha.txt')
 
