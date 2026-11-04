@@ -68,6 +68,14 @@ class LinkedList:
         """
         Removes a node at the beginning of the LinkedList.
         """
+        # Checks if there is no node or 1 node and 'pops' accordingly.
+        if not self.head:
+            return None
+        if self.head.next is None:
+            head = self.head
+            self.head = self.head.next
+            return head
+        # Changes the head to the next node and returns the first head while keeping the data.
         node_to_return = self.head
         self.head = self.head.next
         node_to_return.next = None
@@ -77,11 +85,35 @@ class LinkedList:
         """
         Removes a node at the end of the LinkedList.
         """
+        # Checks if there is no node or 1 node and 'pops' accordingly.
+        if not self.head:
+            return None
+        if self.head.next is None:
+            head = self.head
+            self.head = self.head.next
+            return head
         # Find the tail.
+        tail_find = self.head
+        while tail_find.next.next != None:
+            tail_find = tail_find.next
+        # Sets previous as the node before the node needing to be popped.
+        previous = tail_find
+        # Sets the next node after the previous to be None.
+        previous.next = None
+        # Returns the popped node.
+        return tail_find
+
+    def contains(self, check) -> bool:
+        """
+        Checks if a node in the LinkedList has that data.
+        """
+        # Runs through LinkedList similar to add_right and looks if any node has the data in the contains function.
         current_node = self.head
-        while current_node.next != None:
+        while current_node != None:
+            if current_node.data == check:
+                return True
             current_node = current_node.next
-        tail = current_node
+        return False
 
     def __repr__(self):
         result = ''
@@ -106,6 +138,4 @@ linky = LinkedList()
 for c in 'ABCDEFGHIJKLMNOP':
     linky.add_right(c)
 
-linky.pop_left()
-
-print(linky)
+print(linky.pop_right())
