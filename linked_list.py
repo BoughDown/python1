@@ -135,7 +135,8 @@ class LinkedList:
 
 linky = LinkedList()
 
-for c in 'ABCDEFGHIJKLMNOP':
-    linky.add_right(c)
+linky.add_left(15)
 
-print(linky.pop_right())
+linky.pop_right()
+
+print(linky)
