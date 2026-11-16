@@ -33,24 +33,44 @@ def calculate():
     """
     Gives the button a calculate function to command it.
     """
-    pass
+    if sign.getvar == '+':
+        result = int(f'{entry.getint + entry2.getint}')
+        answer.configure(text = f'{result}')
 
-def operation():
+def plus_operation():
     """
     Adds the operations and numbers to the text label.
     """
-    sign.configure(text = f'plus')
+    sign.configure(text = '+')
 
-plus = tk.Button(base, text = "+", bg = "#A0BEBD", fg = "#000000", command = operation)
+def minus_operation():
+    """
+    Adds the operations and numbers to the text label.
+    """
+    sign.configure(text = '-')
+
+def multiply_operation():
+    """
+    Adds the operations and numbers to the text label.
+    """
+    sign.configure(text = '-')
+
+def division_operation():
+    """
+    Adds the operations and numbers to the text label.
+    """
+    sign.configure(text = '÷')
+
+plus = tk.Button(base, text = "+", bg = "#A0BEBD", fg = "#000000", command = plus_operation)
 plus.grid(row = 2, column = 2)
 
-minus = tk.Button(base, text = "-", bg = "#A0BEBD", fg = "#000000", command = operation)
+minus = tk.Button(base, text = "-", bg = "#A0BEBD", fg = "#000000", command = minus_operation)
 minus.grid(row = 2, column = 3)
 
-multiply = tk.Button(base, text = "x", bg = "#A0BEBD", fg = "#000000", command = operation)
+multiply = tk.Button(base, text = "x", bg = "#A0BEBD", fg = "#000000", command = multiply_operation)
 multiply.grid(row = 2, column = 5)
 
-divide = tk.Button(base, text = "÷", bg = "#A0BEBD", fg = "#000000", command = operation)
+divide = tk.Button(base, text = "÷", bg = "#A0BEBD", fg = "#000000", command = division_operation)
 divide.grid(row = 2, column = 6)
 
 equals = tk.Button(base, text = "=", bg = "#A0BEBD", fg = "#000000", command = calculate())
