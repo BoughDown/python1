@@ -1,0 +1,17 @@
+"""
+Final Project Outline - Tommy Bough
+
+I will create a tkinter GUI. 
+
+From this GUI, the user will be able to interact with an API. 
+
+The API the user interacts with will be able to scrape weather information from the internet. 
+
+The user will input the longitude and latitude for a location they are interested in and the API will return weather data from that location. 
+
+The domain for the latitude domain will be from +-90 degrees and for longitude, +-180 degrees. 
+
+Any input outside of the domain will inform the user that is invalid. 
+
+The results from the API will be written in a text file.
+"""
